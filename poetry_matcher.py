@@ -15,7 +15,7 @@ def main():
         else:
             misses += 1
         num_lines -= 1
-    print("There were {} matches and {} misses for a for a final percent of {}%".format(hits, misses, round((hits/misses)*100, 2)))
+    print("There were {} matches and {} misses for a for a final percent of {}%".format(hits, misses, round((hits/(hits+misses))*100, 2)))
 
 def get_lines():
     while True:
@@ -30,20 +30,15 @@ def get_lines():
             print("That's not an integer!")
 
 def line_checker(poem_lines):
-    selected_line = random.choice(poem_lines).lower()
-    failed_matches = 0
-    for line in poem_lines:
-        if line.lower() == selected_line:
-            pass
+    random.shuffle(poem_lines)
+    selected_line = poem_lines[0]
+    matched_line = poem_lines[1]
+    for word in matched_line.split():
+        if len(word) > 3 and re.match(word, selected_line):
+            print("Two lines share the word {}, They are: \n{}\n{}\n".format(word, selected_line, matched_line))
+            return True
         else:
-            for word in line.lower().split():
-                if len(word) > 3 and re.match(word, selected_line):
-                    print("The line \n{}\n and the line \n{}\n share the word \"{}\" and there were {} failed matches".format(selected_line, line, word, failed_matches))
-                    return True
-                else:
-                    pass
-            failed_matches += 1
-    print("{} failed to match".format(selected_line))
+            pass
     return False
 
 
