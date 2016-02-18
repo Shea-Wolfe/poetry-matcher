@@ -19,7 +19,7 @@ def main():
 
 def get_lines():
     while True:
-        num_lines = input("Select how many lines you would like to attempt to match.")
+        num_lines = input("Select how many line-pairs you would like to attempt to match.")
         try:
             num_lines = int(num_lines)
             if num_lines > 0:
@@ -31,8 +31,8 @@ def get_lines():
 
 def line_checker(poem_lines):
     random.shuffle(poem_lines)
-    selected_line = poem_lines[0]
-    matched_line = poem_lines[1]
+    selected_line = poem_lines[0].lower()
+    matched_line = poem_lines[1].lower()
     for word in matched_line.split():
         if len(word) > 3 and re.match(word, selected_line):
             print("Two lines share the word {}, They are: \n{}\n{}\n".format(word, selected_line, matched_line))
