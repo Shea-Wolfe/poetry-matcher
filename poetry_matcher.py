@@ -30,6 +30,7 @@ def get_lines():
             print("That's not an integer!")
 
 def line_checker(poem_lines):
+    poem_lines = [re.sub(r'[^\s\w]', '', line) for line in poem_lines]
     random.shuffle(poem_lines)
     selected_line = poem_lines[0].lower()
     matched_line = poem_lines[1].lower()
